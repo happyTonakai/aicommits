@@ -24,3 +24,6 @@ dist
 
 # Eslint cache
 .eslintcache
+
+# Local pnpm state (approve-builds)
+pnpm-workspace.yaml

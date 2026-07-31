@@ -136,7 +136,7 @@ export default async (
 			try {
 				let messages: string[];
 				let usage: any;
-				const maxDiffLength = 30000;
+				const maxDiffLength = 100000;
 				let diffToUse = staged.diff;
 				if (diffToUse.length > maxDiffLength) {
 					diffToUse =
@@ -194,8 +194,9 @@ export default async (
 					for (const chunk of chunks) {
 						const chunkDiff = await getStagedDiffForFiles(chunk, excludeFiles);
 						if (chunkDiff && chunkDiff.diff) {
-							// Truncate diff if too large to avoid context limits
-							const maxDiffLength = 30000; // Approximate 7.5k tokens
+							// Truncate diff if too large to avoid context limits.
+							// rtk already condenses the diff, so this is just a safety net.
+							const maxDiffLength = 100000;
 							let diffToUse = chunkDiff.diff;
 							if (diffToUse.length > maxDiffLength) {
 								diffToUse =
