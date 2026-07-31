@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+import"./cli-D_RxYTC1.mjs";import"tty";import"node:buffer";import"node:path";import"node:child_process";import"node:process";import"child_process";import"path";import"fs";import"node:url";import"node:os";import"assert";import"events";import"node:fs";import"buffer";import"stream";import"util";import"node:util";import"node:readline";import"node:stream";import"fs/promises";import"os";import"crypto";import"url";

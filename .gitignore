@@ -20,7 +20,9 @@ node_modules/
 .env.test
 
 # Distribution
-dist
+# NOTE: dist is committed on purpose — npm installs this repo from git and
+# needs the built output present (npm's git-dep prepare step is unreliable
+# for global installs). Rebuild with `pnpm build` and commit dist on changes.
 
 # Eslint cache
 .eslintcache
