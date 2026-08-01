@@ -11,14 +11,28 @@
 
 ---
 
+> ## ⚠️ This is a fork
+>
+> A personal fork of [aicommits](https://github.com/nutlope/aicommits) with one key improvement: **staged diffs are condensed through [rtk](https://github.com/rtk-ai/rtk) before they reach the LLM**, with deletion-aware truncation for purely removed/added files. Deleting a 500k-line file becomes a ~400-character diff summary (stat line + a few sample lines) instead of megabytes of `-` lines. rtk falls back to plain `git diff` when not installed.
+>
+> Install from this repo — the official `npm i -g aicommits` gives you the upstream version without these changes. See [Upgrading](#upgrading) for why you must not use `aicommits update` here.
+
 ## Setup
 
 > The minimum supported version of Node.js is v22. Check your Node.js version with `node --version`.
 
-1. Install _aicommits_:
+1. Install _aicommits_ (this fork):
 
    ```sh
-   npm install -g aicommits
+   npm install -g github:happyTonakai/aicommits#develop
+   ```
+
+   > **npm 11 note:** installing directly from a GitHub URL is unreliable on npm 11 — the install can report success but leave a broken symlink (the package ends up pointing at a cleaned-up temp directory), or fail to find build tools. The built `dist` is committed to this repo, so if the command above misbehaves, install from a local clone instead (no build step needed):
+
+   ```sh
+   git clone --depth 1 https://github.com/happyTonakai/aicommits.git
+   cd aicommits
+   npm i -g .
    ```
 
 2. Run the setup command to choose your AI provider:
@@ -59,24 +73,18 @@ This will guide you through:
 
 ### Upgrading
 
-Check the installed version with:
+> ⚠️ **Do not use `aicommits update` on this fork.** It reinstalls `aicommits@latest` from the npm registry and will silently replace this fork with the official upstream version.
+
+To update this fork:
 
 ```sh
-aicommits --version
+npm install -g github:happyTonakai/aicommits#develop
 ```
 
-To update to the latest version, run:
+or, for a local-clone install:
 
 ```sh
-aicommits update
-```
-
-This will automatically detect your package manager (npm, pnpm, yarn, or bun) and update using the correct command.
-
-Alternatively, you can manually update:
-
-```sh
-npm install -g aicommits
+cd aicommits && git pull && npm i -g .
 ```
 
 ## Usage
